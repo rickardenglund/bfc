@@ -56,7 +56,6 @@ func Parse(ts []lex.Token) ([]Instruction, error) {
 		}
 
 		prog = append(prog, ins)
-
 	}
 
 	if len(targets) > 0 {

@@ -7,14 +7,14 @@ import (
 	"bfc/parse"
 )
 
-type state struct {
+type State struct {
 	ip  int
 	sp  byte
 	mem [256]byte
 }
 
-func Run(ins []parse.Instruction) {
-	s := state{}
+func Run(ins []parse.Instruction) *State {
+	s := State{}
 	for s.ip < len(ins) {
 		op := ins[s.ip]
 		switch op.Op {
@@ -43,10 +43,10 @@ func Run(ins []parse.Instruction) {
 		s.ip++
 	}
 
-	fmt.Printf("\nState:\n%s", s)
+	return &s
 }
 
-func (s state) String() string {
+func (s State) String() string {
 	str := fmt.Sprintf("{\n\tip: %d\n\tsp: %d\n}", s.ip, s.sp)
 	for i, b := range s.mem[:8] {
 		if i%8 == 0 {
